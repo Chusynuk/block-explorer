@@ -60,6 +60,10 @@ function App() {
 
   const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRequestHash(e.target.value);
+
+    if (addressNotFound && !e.target.value) {
+      setAddressNotFound(false);
+    }
   };
 
   const handleBalance = async () => {
@@ -165,7 +169,7 @@ function App() {
                 color="teal"
                 _placeholder={{ color: "inherit" }}
                 placeholder="Type address or ENS to see balance"
-                isInvalid={addressNotFound ? "true" : "false"}
+                isInvalid={addressNotFound}
                 errorBorderColor={addressNotFound ? "crimson" : null}
                 onChange={handleInputValue}
                 onKeyDown={handleOnKeyPressed}
