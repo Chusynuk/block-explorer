@@ -89,7 +89,7 @@ function App() {
           <Flex bg="#262525" h="100vh" color="white" justify="center" pt="6">
             <Flex direction="column">
               <Button
-                colorScheme="teal"
+                colorScheme="green"
                 variant="solid"
                 mb="2"
                 onClick={handleGetLatestTransactions}
@@ -110,19 +110,19 @@ function App() {
                 <Heading as="h6" mb="4">
                   Block Number: {blockDetails?.number}
                 </Heading>
-                <Text mb="2">Click to display block transactions:</Text>
+                <Flex justify="center" align="center" mb="3">
+                  <Text as="b">Parent hash: </Text>
+                  <Text>{blockDetails?.parentHash}</Text>
+                </Flex>
                 <Button
                   size="md"
-                  colorScheme="teal"
+                  colorScheme="green"
                   mb="3"
                   onClick={handleToggleBlockTransactions}
                 >
                   Click me!
                 </Button>
-                <Flex justify="center" align="center">
-                  <Text as="b">Parent hash: </Text>
-                  <Text>{blockDetails?.parentHash}</Text>
-                </Flex>
+
                 <Flex justify="center" mt="5">
                   <List>
                     <Text mb="3">Block transactions:</Text>
@@ -134,10 +134,9 @@ function App() {
                           ) => {
                             return (
                               <ListItem key={index}>
-                                <ListIcon as={CheckIcon} color="green.500" />
                                 <Button
                                   size="sm"
-                                  colorScheme="yellow"
+                                  colorScheme="green"
                                   mb="1"
                                   onClick={() => handleTransactionInfo(index)}
                                 >
