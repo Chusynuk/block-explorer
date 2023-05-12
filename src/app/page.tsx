@@ -70,7 +70,10 @@ function App() {
     await alchemy.core
       .getBalance(requestHash)
       .then((balance) => setBalance(balance.toString()))
-      .catch(() => setAddressNotFound(true));
+      .catch(() => {
+        setAddressNotFound(true);
+        setBalance("");
+      });
   };
 
   const handleOnKeyPressed = (event: React.KeyboardEvent<HTMLInputElement>) => {
