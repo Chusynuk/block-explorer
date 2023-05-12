@@ -10,7 +10,7 @@ const theme = extendTheme({
     mono: `'Share Tech Mono', monospace`,
   },
 });
-console.log("theme", theme);
+// console.log("theme", theme);
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <CacheProvider>

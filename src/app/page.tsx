@@ -30,6 +30,7 @@ function App() {
   const [singleTransactionInfo, setSingleTransactionInfo] = useState();
   const [requestHash, setRequestHash] = useState("");
   const [balance, setBalance] = useState("");
+  const [addressNotFound, setAddressNotFound] = useState(false);
 
   useEffect(() => {
     async function getBlockNumber() {
@@ -64,7 +65,8 @@ function App() {
   const handleBalance = async () => {
     await alchemy.core
       .getBalance(requestHash)
-      .then((balance) => setBalance(balance.toString()));
+      .then((balance) => setBalance(balance.toString()))
+      .catch(() => setAddressNotFound(true));
   };
 
   const handleOnKeyPressed = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -80,11 +82,6 @@ function App() {
     <React.Fragment>
       <Flex>
         <Flex direction="column" w="100vw" p="2">
-          {/* <Box flex="1" h="300px">
-              <Text>hello</Text>
-            </Box> */}
-
-          {/* <Center bg="#262525" h="100vh" color="white"> */}
           <Flex bg="#262525" h="100vh" color="white" justify="center" pt="6">
             <Flex direction="column">
               <Button
@@ -152,23 +149,14 @@ function App() {
               </Box>
               <Flex direction="column" mt="5">
                 <Text>
-                  <Text>
-                    Transaction hash: {singleTransactionInfo?.transactionHash}
-                  </Text>
+                  Transaction hash: {singleTransactionInfo?.transactionHash}
                 </Text>
+                <Text mt="3">From: {singleTransactionInfo?.from}</Text>
+                <Text mt="3">To: {singleTransactionInfo?.to}</Text>
                 <Text mt="3">
-                  <Text>From: {singleTransactionInfo?.from}</Text>
-                </Text>
-                <Text mt="3">
-                  <Text>To: {singleTransactionInfo?.to}</Text>
-                </Text>
-                <Text mt="3">
-                  <Text>
-                    Confirmations: {singleTransactionInfo?.confirmations}
-                  </Text>
+                  Confirmations: {singleTransactionInfo?.confirmations}
                 </Text>
               </Flex>
-
               <Heading as="h6" mb="4" mt="10">
                 Balance checker:
               </Heading>
@@ -177,10 +165,12 @@ function App() {
                 color="teal"
                 _placeholder={{ color: "inherit" }}
                 placeholder="Type address or ENS to see balance"
+                isInvalid={addressNotFound ? "true" : "false"}
+                errorBorderColor={addressNotFound ? "crimson" : null}
                 onChange={handleInputValue}
                 onKeyDown={handleOnKeyPressed}
               />
-
+              addressNotFound
               <Button onClick={handleBalance} colorScheme="green" mb="10">
                 Click to see balance
               </Button>
