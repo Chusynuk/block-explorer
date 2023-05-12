@@ -13,6 +13,7 @@ import {
   Heading,
   ListIcon,
 } from "@chakra-ui/react";
+import { CheckIcon } from "@chakra-ui/icons";
 
 const settings = {
   apiKey: process.env.REACT_APP_ALCHEMY_API_KEY,
@@ -81,18 +82,20 @@ function App() {
           {/* <Box flex="1" h="300px">
               <Text>hello</Text>
             </Box> */}
-          <Button
-            colorScheme="teal"
-            variant="solid"
-            mb="2"
-            onClick={handleGetLatestTransactions}
-          >
-            Get most recently mined block
-          </Button>
+
           {/* <Center bg="#262525" h="100vh" color="white"> */}
           <Flex bg="#262525" h="100vh" color="white" justify="center" pt="6">
             <Flex direction="column">
+              <Button
+                colorScheme="teal"
+                variant="solid"
+                mb="2"
+                onClick={handleGetLatestTransactions}
+              >
+                Get most recently mined block
+              </Button>
               <Box
+                bg="chocolate"
                 style={{
                   border: "1px solid black",
                   overflowY: "scroll",
@@ -118,7 +121,7 @@ function App() {
                   <Text as="b">Parent hash: </Text>
                   <Text>{blockDetails?.parentHash}</Text>
                 </Flex>
-                <Flex justify="start" mt="5">
+                <Flex justify="center" mt="5">
                   <List>
                     <Text mb="3">Block transactions:</Text>
                     {blockTransactions
@@ -128,8 +131,8 @@ function App() {
                             index: React.Key | null | undefined
                           ) => {
                             return (
-                              <ListItem>
-                                <ListIcon as="CheckIcon" color="green.500" />
+                              <ListItem key={index}>
+                                <ListIcon as={CheckIcon} color="green.500" />
                                 <Button
                                   size="sm"
                                   colorScheme="yellow"
@@ -148,21 +151,27 @@ function App() {
               </Box>
               <Flex direction="column" mt="5">
                 <Text>
-                  <Text>Transaction hash:</Text>{" "}
-                  {singleTransactionInfo?.transactionHash}
+                  <Text>
+                    Transaction hash: {singleTransactionInfo?.transactionHash}
+                  </Text>
                 </Text>
                 <Text mt="3">
-                  <Text>From:</Text> {singleTransactionInfo?.from}
+                  <Text>From: {singleTransactionInfo?.from}</Text>
                 </Text>
                 <Text mt="3">
-                  <Text>To:</Text> {singleTransactionInfo?.to}
+                  <Text>To: {singleTransactionInfo?.to}</Text>
                 </Text>
                 <Text mt="3">
-                  <Text>Confirmations: </Text>
-                  {singleTransactionInfo?.confirmations}
+                  <Text>
+                    Confirmations: {singleTransactionInfo?.confirmations}
+                  </Text>
                 </Text>
               </Flex>
 
+              <Heading as="h6" mb="4" mt="10">
+                Balance checker:
+              </Heading>
+              <Text mb="2">Balance: {balance}</Text>
               <Input
                 color="teal"
                 _placeholder={{ color: "inherit" }}
@@ -171,11 +180,11 @@ function App() {
                 onKeyDown={handleOnKeyPressed}
               />
 
-              <Button text="Click to see balance :)" onClick={handleBalance} />
-              {balance}
+              <Button onClick={handleBalance} colorScheme="green" mb="10">
+                Click to see balance
+              </Button>
             </Flex>
           </Flex>
-          {/* </Center> */}
         </Flex>
       </Flex>
     </React.Fragment>
