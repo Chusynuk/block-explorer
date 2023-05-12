@@ -117,7 +117,7 @@ function App() {
                   mb="3"
                   onClick={handleToggleBlockTransactions}
                 >
-                  {blockDetails?.number}
+                  Click me!
                 </Button>
                 <Flex justify="center" align="center">
                   <Text as="b">Parent hash: </Text>
@@ -164,18 +164,25 @@ function App() {
               <Heading as="h6" mb="4" mt="10">
                 Balance checker:
               </Heading>
-              <Text mb="2">Balance: {balance}</Text>
+              <Text mb="2">
+                {balance ? <CheckIcon color="green.500" mr="2" /> : null}
+                Balance: {balance}
+              </Text>
               <Input
                 color="teal"
                 _placeholder={{ color: "inherit" }}
                 placeholder="Type address or ENS to see balance"
                 isInvalid={addressNotFound}
-                errorBorderColor={addressNotFound ? "crimson" : null}
+                errorBorderColor="crimson"
                 onChange={handleInputValue}
                 onKeyDown={handleOnKeyPressed}
               />
-              addressNotFound
-              <Button onClick={handleBalance} colorScheme="green" mb="10">
+              <Button
+                onClick={handleBalance}
+                colorScheme="green"
+                mt="5"
+                mb="10"
+              >
                 Click to see balance
               </Button>
             </Flex>
