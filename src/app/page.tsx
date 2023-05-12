@@ -70,6 +70,7 @@ function App() {
     await alchemy.core
       .getBalance(requestHash)
       .then((balance) => setBalance(balance.toString()))
+      .then(() => setAddressNotFound(false))
       .catch(() => {
         setAddressNotFound(true);
         setBalance("");
