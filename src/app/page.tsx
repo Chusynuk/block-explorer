@@ -60,17 +60,13 @@ function App() {
 
   const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRequestHash(e.target.value);
-
-    if (addressNotFound && !e.target.value) {
-      setAddressNotFound(false);
-    }
+    setAddressNotFound(false);
   };
 
   const handleBalance = async () => {
     await alchemy.core
       .getBalance(requestHash)
       .then((balance) => setBalance(balance.toString()))
-      .then(() => setAddressNotFound(false))
       .catch(() => {
         setAddressNotFound(true);
         setBalance("");
@@ -87,7 +83,7 @@ function App() {
     setBlockNumber(await alchemy.core.getBlockNumber());
 
   return (
-    <React.Fragment>
+    <>
       <Flex>
         <Flex direction="column" w="100vw" p="2">
           <Flex bg="#262525" h="100vh" color="white" justify="center" pt="6">
@@ -192,7 +188,7 @@ function App() {
           </Flex>
         </Flex>
       </Flex>
-    </React.Fragment>
+    </>
   );
 }
 
