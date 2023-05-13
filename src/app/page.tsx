@@ -83,7 +83,7 @@ function App() {
     setBlockNumber(await alchemy.core.getBlockNumber());
 
   return (
-    <>
+    <React.Fragment>
       <Flex>
         <Flex direction="column" w="100vw" p="2">
           <Flex bg="#262525" h="100vh" color="white" justify="center" pt="6">
@@ -188,7 +188,7 @@ function App() {
           </Flex>
         </Flex>
       </Flex>
-    </>
+    </React.Fragment>
   );
 }
 
